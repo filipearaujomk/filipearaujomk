@@ -1,0 +1,27 @@
+'instale as bibliotecas pelo cmd - windows'
+'pip install PyPDF2'
+'pip install pyttsx3'
+
+import PyPDF2
+import pyttsx3
+
+'o arquivo py(python) deve estar na mesma pasta(diretório) que o arquivo .pdf'
+path = open(input("digite o nome do arquivo .pdf:\n"), 'rb')
+pdfReader = PyPDF2.PdfFileReader(path)
+
+'define quantas páginas tem no arquivo .pdf'
+a = 0
+pg = int(input("quantas páginas contém no arquivo? \n"))
+
+'quanto maior o número de páginas maior será o tempo de iniciação do áudio'
+'teste com um pdf de 1 página'
+'se o código funcionar perfeitamente, faça com os outros arquivos que queira '
+while a<=pg:
+ num_pages = pdfReader.getNumPages()
+ from_page = pdfReader.getPage(a)
+ text = from_page.extractText()
+ 
+ speak = pyttsx3.init()
+ speak.say(text)
+ speak.runAndWait()
+ a += 1
